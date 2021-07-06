@@ -1,0 +1,10 @@
+version: '3'
+services:
+  mealprepjs-server:
+    entrypoint: ['/bin/bash', './entrypoint-dev.sh']
+    image: node:latest
+    ports:
+      - '5000:5000'
+    working_dir: /opt/app
+    volumes:
+      - ./server:/opt/app

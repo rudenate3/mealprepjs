@@ -1,0 +1,18 @@
+{
+  "name": "mealprepjs-server",
+  "version": "1.0.0",
+  "description": "Meal Prep JS server in Express",
+  "main": "index.js",
+  "repository": "https://github.com/rudenate3/mealprepjs",
+  "author": "rudenate3",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
+  },
+  "scripts": {
+    "dev": "nodemon ./index"
+  }
+}

@@ -2,6 +2,8 @@ version: '3'
 services:
   mealprepjs-server:
     entrypoint: ['/bin/bash', './entrypoint-dev.sh']
+    environment:
+      - NODE_ENV=development
     image: node:latest
     ports:
       - '5000:5000'

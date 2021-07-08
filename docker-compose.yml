@@ -1,8 +1,12 @@
 version: '3'
 services:
   mealprepjs-server:
+    depends_on:
+      - mealprepjs-mongo
     entrypoint: ['/bin/bash', './entrypoint-dev.sh']
     environment:
+      - MONGO_DATABASE=mealprepjs_development
+      - MONGO_URI=mealprepjs-mongo
       - NODE_ENV=development
     image: node:latest
     ports:
@@ -10,3 +14,8 @@ services:
     working_dir: /opt/app
     volumes:
       - ./server:/opt/app
+  mealprepjs-mongo:
+    command: mongod --quiet --logpath /dev/null
+    image: mongo:latest
+    ports:
+      - 27017:27017

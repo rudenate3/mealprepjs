@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express'
 
 const app = express()
 
-app.use('/', async (req: Request, res: Response) => res.send({ success: true }))
+if (process.env.NODE_ENV !== 'production') {
+  app.get('/up', (_, res: Response) => res.send({ status: 'Online' }))
+}
 
 export { app }

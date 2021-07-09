@@ -5,6 +5,8 @@ services:
       - mealprepjs-mongo
     entrypoint: ['/bin/bash', './entrypoint-dev.sh']
     environment:
+      - JWT_EXPIRE=30
+      - JWT_KEY=secret
       - MONGO_DATABASE=mealprepjs_development
       - MONGO_URI=mealprepjs-mongo
       - NODE_ENV=development

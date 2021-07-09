@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const connectDb = async () => {
+export const connectDb = async () => {
   try {
     const conn = await mongoose.connect(
       `mongodb://${process.env.MONGO_URI}:27017/${process.env.MONGO_DATABASE}`,
@@ -18,5 +18,3 @@ const connectDb = async () => {
     throw new Error(err.message)
   }
 }
-
-export { connectDb }

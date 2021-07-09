@@ -5,6 +5,7 @@ let mongo: any
 
 beforeAll(async () => {
   process.env.JWT_KEY = 'test_key'
+  process.env.JWT_EXPIRE = '30'
 
   mongo = new MongoMemoryServer()
   const mongoUri = await mongo.getUri()

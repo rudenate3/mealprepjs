@@ -1,6 +1,11 @@
-const required: string[] = ['MONGO_DATABASE', 'MONGO_URI']
+const required: string[] = [
+  'JWT_EXPIRE',
+  'JWT_KEY',
+  'MONGO_DATABASE',
+  'MONGO_URI'
+]
 
-const checkEnvVariables = () => {
+export const checkEnvVariables = () => {
   required.forEach((env: string) => {
     try {
       if (!process?.env?.[env]) {
@@ -11,5 +16,3 @@ const checkEnvVariables = () => {
     }
   })
 }
-
-export { checkEnvVariables }

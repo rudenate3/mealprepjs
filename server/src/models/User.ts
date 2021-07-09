@@ -21,6 +21,7 @@ interface IUserDoc extends Document {
   createdAt: Date
   updatedAt: Date
   getSignedJwtToken: () => string
+  matchPassword: (enteredPassword: string) => boolean
 }
 
 const userSchema = new Schema(
@@ -83,6 +84,12 @@ userSchema.methods.getSignedJwtToken = function (): string {
       expiresIn: process.env.JWT_EXPIRE
     }
   )
+}
+
+userSchema.methods.matchPassword = async function (
+  enteredPassword: string
+): Promise<boolean> {
+  return await bcrypt.compare(enteredPassword, this.get('password'))
 }
 
 userSchema.statics.build = (attrs: IUserAttrs) => {

@@ -67,29 +67,37 @@ const userSchema = new Schema(
   }
 )
 
-userSchema.pre('save', async function (done) {
+userSchema.pre('save', async function (done): void {
   if (this.isModified('password')) {
-    const salt = await bcrypt.genSalt(10)
-    const hashed = await bcrypt.hash(this.get('password'), salt)
-    this.set('password', hashed)
+    try {
+      const salt = await bcrypt.genSalt(10)
+      const hashed = await bcrypt.hash(this.get('password'), salt)
+      this.set('password', hashed)
+    } catch (err) {
+      throw err
+    }
   }
   done()
 })
 
 userSchema.methods.getSignedJwtToken = function (): string {
-  return jwt.sign(
-    { email: this.get('email'), id: this.get('_id') },
-    process.env.JWT_KEY!,
-    {
+  try {
+    return jwt.sign({ id: this.get('_id') }, process.env.JWT_KEY!, {
       expiresIn: process.env.JWT_EXPIRE
-    }
-  )
+    })
+  } catch (err) {
+    throw err
+  }
 }
 
 userSchema.methods.matchPassword = async function (
   enteredPassword: string
 ): Promise<boolean> {
-  return await bcrypt.compare(enteredPassword, this.get('password'))
+  try {
+    return await bcrypt.compare(enteredPassword, this.get('password'))
+  } catch (err) {
+    throw err
+  }
 }
 
 userSchema.statics.build = (attrs: IUserAttrs) => {

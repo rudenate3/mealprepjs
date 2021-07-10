@@ -1,5 +1,4 @@
 import cookieParser from 'cookie-parser'
-import cookieSession from 'cookie-session'
 import express, { Response } from 'express'
 import 'express-async-errors'
 import morgan from 'morgan'

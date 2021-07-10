@@ -7,6 +7,8 @@ import BadRequestError from '@errors/bad-request-error'
 
 import User from '@models/User'
 
+import { sendTokenResponse } from './helpers'
+
 const router = Router()
 
 router.post(
@@ -32,11 +34,7 @@ router.post(
     const user = User.build({ email, username, password })
     await user.save()
 
-    req.session = {
-      jwt: user.getSignedJwtToken()
-    }
-
-    res.status(201).send(user)
+    sendTokenResponse(user, 201, res)
   }
 )
 

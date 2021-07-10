@@ -7,6 +7,8 @@ import { validateRequest } from '@middleware/validate-request'
 
 import User from '@models/User'
 
+import { sendTokenResponse } from './helpers'
+
 const router = Router()
 
 router.post(
@@ -25,11 +27,7 @@ router.post(
     const passwordsMatch = await existingUser.matchPassword(password)
     if (!passwordsMatch) throw new BadRequestError('Invalid Credentials')
 
-    req.session = {
-      jwt: existingUser.getSignedJwtToken()
-    }
-
-    res.status(200).send(existingUser)
+    sendTokenResponse(existingUser, 200, res)
   }
 )
 

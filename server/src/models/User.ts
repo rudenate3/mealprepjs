@@ -2,18 +2,18 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { Document, Model, model, Schema } from 'mongoose'
 
-interface IUserAttrs {
+export interface IUserAttrs {
   username: string
   email: string
   role?: string
   password: string
 }
 
-interface IUserModel extends Model<IUserDoc> {
+export interface IUserModel extends Model<IUserDoc> {
   build(attrs: IUserAttrs): IUserDoc
 }
 
-interface IUserDoc extends Document {
+export interface IUserDoc extends Document {
   username: string
   email: string
   role: string

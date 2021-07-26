@@ -1,5 +1,14 @@
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken'
+
+declare global {
+  namespace NodeJS {
+    interface Global {
+      login(): Promise<string[]>
+    }
+  }
+}
 
 let mongo: any
 
@@ -28,3 +37,13 @@ afterAll(async () => {
   await mongo.stop()
   await mongoose.connection.close()
 })
+
+global.login = async () => {
+  const payload = {
+    id: new mongoose.Types.ObjectId().toHexString()
+  }
+
+  const token = jwt.sign(payload, process.env.JWT_KEY!)
+
+  return [`token=${token}`]
+}

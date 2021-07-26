@@ -4,6 +4,7 @@ import 'express-async-errors'
 import morgan from 'morgan'
 import mongoSanitize from 'express-mongo-sanitize'
 
+import { currentUser } from '@middleware/current-user'
 import { errorHandler } from '@middleware/error-handler'
 
 import NotFoundError from '@errors/not-found-error'
@@ -22,6 +23,8 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 
 if (process.env.NODE_ENV !== 'production')
   app.get('/up', (_, res: Response) => res.send({ status: 'Online' }))
+
+app.use(currentUser)
 
 app.use('/api/v1', v1Router)
 

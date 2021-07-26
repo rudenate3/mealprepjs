@@ -10,7 +10,7 @@ interface RecipeAttrs {
 interface RecipeDoc extends mongoose.Document {
   description?: string
   images?: Array<string>
-  title: string
+  name: string
   userId: string
 }
 
@@ -24,27 +24,29 @@ const recipeSchema = new mongoose.Schema(
       type: String
     },
     images: [String],
-    ingredients: {
-      amount: {
-        type: Number,
-        required: true
-      },
-      ingredient: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Ingredient',
-        required: true
-      },
-      measurement: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Measurement',
-        required: true
+    ingredients: [
+      {
+        amount: {
+          type: Number,
+          required: true
+        },
+        ingredient: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Ingredient',
+          required: true
+        },
+        measurement: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Measurement',
+          required: true
+        }
       }
-    },
+    ],
     name: {
       type: String,
       required: true
     },
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true

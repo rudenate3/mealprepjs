@@ -23,6 +23,7 @@
     "@types/react-icons": "^3.0.0",
     "@types/react-select": "^4.0.17",
     "@types/styled-components": "^5.1.11",
+    "babel-plugin-styled-components": "^1.13.2",
     "eslint": "7.31.0",
     "eslint-config-next": "11.0.1",
     "typescript": "4.3.5"

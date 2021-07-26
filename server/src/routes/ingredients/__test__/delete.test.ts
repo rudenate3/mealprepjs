@@ -3,9 +3,9 @@ import mongoose from 'mongoose'
 
 import { app } from '@src/app'
 
-const API_URL = '/api/v1/recipes/'
+const API_URL = '/api/v1/ingredients/'
 
-it('returns 404 if recipe is not found', async () => {
+it('returns 404 if ingredient is not found', async () => {
   const id = new mongoose.Types.ObjectId().toHexString()
 
   await request(app)
@@ -24,20 +24,7 @@ it('returns 401 if user is not logged in', async () => {
     .expect(401)
 })
 
-it('returns 401 when the user is not owner', async () => {
-  const response = await request(app)
-    .post(API_URL)
-    .set('Cookie', await global.login())
-    .send({ description: 'description', name: 'Test' })
-
-  await request(app)
-    .delete(API_URL + response.body.id)
-    .set('Cookie', await global.login())
-    .send()
-    .expect(401)
-})
-
-it('returns 204 and removes recipe', async () => {
+it('returns 204 and removes ingredient', async () => {
   const cookie = await global.login()
   const response = await request(app)
     .post(API_URL)

@@ -2,14 +2,14 @@ import mongoose from 'mongoose'
 
 interface IngredientAttrs {
   description?: string
-  foodType: string
+  foodType?: string
   images?: Array<string>
   name: string
 }
 
 interface IngredientDoc extends mongoose.Document {
   description?: string
-  foodType: string
+  foodType?: string
   images?: Array<string>
   title: string
 }

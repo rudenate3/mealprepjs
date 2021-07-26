@@ -2,7 +2,7 @@ import request from 'supertest'
 
 import { app } from '@src/app'
 
-const API_URL = '/api/v1/recipes/'
+const API_URL = '/api/v1/ingredients/'
 
 it('responds to request', async () => {
   const response = await request(app).get(API_URL).send()
@@ -14,7 +14,7 @@ it('responds with 200', async () => {
   await request(app).get(API_URL).send().expect(200)
 })
 
-const createRecipe = async () => {
+const createIngredient = async () => {
   return request(app)
     .post(API_URL)
     .set('Cookie', await global.login())
@@ -23,10 +23,10 @@ const createRecipe = async () => {
     })
 }
 
-it('gets list of recipes', async () => {
-  await createRecipe()
-  await createRecipe()
-  await createRecipe()
+it('gets list of ingredients', async () => {
+  await createIngredient()
+  await createIngredient()
+  await createIngredient()
 
   const response = await request(app).get(API_URL).send({})
 

@@ -4,14 +4,12 @@ interface MeasurementAttrs {
   description?: string
   images?: Array<string>
   name: string
-  userId: string
 }
 
 interface MeasurementDoc extends mongoose.Document {
   description?: string
   images?: Array<string>
   title: string
-  userId: string
 }
 
 interface MeasurementModel extends mongoose.Model<MeasurementDoc> {

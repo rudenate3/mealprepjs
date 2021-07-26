@@ -9,7 +9,8 @@ export const checkEnvVariables = () => {
   required.forEach((env: string) => {
     try {
       if (!process?.env?.[env]) {
-        throw new Error(`${env} must be defined`)
+        console.error(`${env} must be defined`)
+        process.exit(1)
       }
     } catch (err) {
       throw new Error(err.message)

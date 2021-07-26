@@ -15,6 +15,7 @@ export const connectDb = async () => {
     if (process.env.NODE_ENV === 'development')
       console.log(`MongoDB Connected: ${conn.connection.host}`)
   } catch (err) {
-    throw new Error(err.message)
+    console.error(err.message)
+    process.exit(1)
   }
 }
